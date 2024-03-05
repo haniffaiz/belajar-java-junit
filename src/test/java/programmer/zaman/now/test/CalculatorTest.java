@@ -1,9 +1,6 @@
 package programmer.zaman.now.test;
 
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.DisplayNameGeneration;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import programmer.zaman.now.test.generator.SimpleDisplayNameGenerator;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,6 +10,26 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CalculatorTest {
 
     private Calculator calculator = new Calculator();
+
+    @BeforeAll //harus statik
+    public static void beforeAll(){
+        System.out.println("Before all");
+    }
+
+    @AfterAll //harus statik
+    public static void afterAll(){
+        System.out.println("After all");
+    }
+
+    @BeforeEach
+    public void setUp(){
+        System.out.println("Before each");
+    }
+
+    @AfterEach
+    public void tearDown(){
+        System.out.println("After each");
+    }
 
     @Test
     @DisplayName("Test skenario sukses method add()")
