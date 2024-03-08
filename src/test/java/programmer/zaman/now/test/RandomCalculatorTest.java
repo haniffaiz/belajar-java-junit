@@ -9,12 +9,10 @@ import programmer.zaman.now.test.resolver.RandomParameterResolver;
 import java.util.Random;
 
 //dependensi injection junit
-@Extensions({
-        @ExtendWith(RandomParameterResolver.class)
-})
-public class RandomCalculatorTest {
 
-    private Calculator calculator = new Calculator();
+public class RandomCalculatorTest extends AbstractCalculatorTest{
+
+
 
     @Test
     void testRandom(Random random) {
