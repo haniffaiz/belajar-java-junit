@@ -3,8 +3,12 @@ package programmer.zaman.now.test;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.Extensions;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import programmer.zaman.now.test.resolver.RandomParameterResolver;
 
+import java.util.List;
 import java.util.Random;
 
 //dependensi injection junit
@@ -55,5 +59,30 @@ public class RandomCalculatorTest extends AbstractCalculatorTest{
         var expected = a + b;
 
         Assertions.assertEquals(expected,result);
+    }
+
+    //test dengan parameter @ValueSource
+    @DisplayName("Test calculator")
+    @ParameterizedTest(name="{displayName} dengan parameter {0}")
+    @ValueSource(ints = {1,2,3,4,5})
+    void testWithParameter(int value) {
+        var expected = value + value;
+        var result = calculator.add(value, value);
+
+        Assertions.assertEquals(expected, result);
+    }
+
+    //test dengan parameter @MethodSource
+    public static List<Integer> parameterSource(){
+        return List.of(1,2,3,4,5,6,7,8);
+    }
+    @DisplayName("Test calculator")
+    @ParameterizedTest(name="{displayName} dengan parameter {0}")
+    @MethodSource({"parameterSource"})
+    void testWithMethodSource(Integer value) {
+        var expected = value + value;
+        var result = calculator.add(value, value);
+
+        Assertions.assertEquals(expected, result);
     }
 }
